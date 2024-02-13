@@ -10,6 +10,7 @@ import {
 } from "../redux/features/flower/flowerApi";
 import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import LoadingData from "../components/LoadingData";
 
 const ALlFlowers = () => {
   const [filterParams, setFilterParams] = useState({
@@ -27,8 +28,12 @@ const ALlFlowers = () => {
   });
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
 
-  const { data } = useGetFlowersQuery(filterParams);
+  const { data, isLoading } = useGetFlowersQuery(filterParams);
   const [deleteSelectedFlower] = useDeleteSelectedFlowerMutation();
+
+  if (isLoading) {
+    return <LoadingData />
+  }
 
   const handleFilterChange = (filterName: string, value: string) => {
     setFilterParams((prevParams: any) => ({
@@ -54,7 +59,7 @@ const ALlFlowers = () => {
   const handleMultipleDelete = async () => {
     await deleteSelectedFlower(selectedRowKeys);
 
-    toast.success("Selected flowers deleted")
+    toast.success("Selected flowers deleted");
     setSelectedRowKeys([]);
   };
 

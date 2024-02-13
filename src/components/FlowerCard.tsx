@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { TFlower } from "../globalInterface.ts/globalInterface";
 import { useDeleteFlowerMutation } from "../redux/features/flower/flowerApi";
 import { toast } from "sonner";
+import { useAppSelector } from "../redux/hook";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
 
 const FlowerCard = ({
   item,
@@ -14,6 +16,7 @@ const FlowerCard = ({
   handleCheckboxChange: any;
 }) => {
   const [deleteFlower] = useDeleteFlowerMutation();
+  const user = useAppSelector(useCurrentUser);
 
   const handleDelete = async (_id: string) => {
     await deleteFlower(_id);
@@ -25,6 +28,7 @@ const FlowerCard = ({
       <th>
         <label>
           <input
+            disabled={user?.role == "manager" ? false : true}
             type="checkbox"
             className="checkbox"
             checked={selectedRowKeys.includes(item._id)} // Check if the item is selected
@@ -52,13 +56,17 @@ const FlowerCard = ({
       <th>{item?.popularity}</th>
       <th>{item.bloomDate}</th>
       <th className="">
-        <button className="btn bg-blue-600 text-white btn-xs">
+        <button
+          disabled={user?.role == "manager" ? false : true}
+          className="btn bg-blue-600 text-white btn-xs"
+        >
           <Link to={"/update-flower"} state={item}>
             Update
           </Link>
         </button>
         <br />
         <button
+          disabled={user?.role == "manager" ? false : true}
           onClick={() => handleDelete(item._id)}
           className="btn bg-red-600 text-white btn-xs mt-2"
         >

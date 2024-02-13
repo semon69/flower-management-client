@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { TFlower } from "../globalInterface.ts/globalInterface";
 import SellModal from "./SellModal";
+import { useAppSelector } from "../redux/hook";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
 
 const SellCard = ({ item }: { item: TFlower }) => {
-  const [showModal, setShowModal] = useState(false)
-
+  const [showModal, setShowModal] = useState(false);
+  const user = useAppSelector(useCurrentUser);
 
   return (
     <tr>
@@ -24,13 +26,15 @@ const SellCard = ({ item }: { item: TFlower }) => {
       <th>{item.price}</th>
       <th>{item.bloomDate}</th>
       <th>
-        <button className="btn bg-blue-600" onClick={() => setShowModal(true)}>
+        <button
+          disabled={user?.role == "manager" ? true : false}
+          className="btn bg-blue-600"
+          onClick={() => setShowModal(true)}
+        >
           Sell
         </button>
 
-        {
-          showModal && <SellModal setShowModal={setShowModal} item={item} />
-        }
+        {showModal && <SellModal setShowModal={setShowModal} item={item} />}
       </th>
     </tr>
   );
