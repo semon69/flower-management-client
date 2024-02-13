@@ -3,12 +3,31 @@ import { Controller, useForm } from "react-hook-form";
 import { useAddSellMutation } from "../redux/features/sells/sellApi";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
+import { useAppSelector } from "../redux/hook";
+import { useTotalUserQuery } from "../redux/features/auth/authApi";
+import LoadingData from "./LoadingData";
 
-const SellModal = ({ item, setShowModal }: {item: any, setShowModal: any}) => {
-
+const SellModal = ({
+  item,
+  setShowModal,
+}: {
+  item: any;
+  setShowModal: any;
+}) => {
   const [addSell] = useAddSellMutation();
   const { handleSubmit, control, reset } = useForm();
   const [quantityError, setQuantityError] = useState("");
+  const user = useAppSelector(useCurrentUser);
+  const { data: totalUser, isLoading } = useTotalUserQuery(undefined);
+
+  const currentUserName = totalUser?.data?.find(
+    (item: any) => item?.email == user?.email
+  );
+  console.log(currentUserName?.name);
+  if (isLoading) {
+    return <LoadingData />;
+  }
 
   const onSubmit = async (data: any) => {
     try {
@@ -30,7 +49,7 @@ const SellModal = ({ item, setShowModal }: {item: any, setShowModal: any}) => {
       };
 
       await addSell(sellsData);
-      setShowModal(false)
+      setShowModal(false);
 
       toast.success("Sell History added successfullty", {
         duration: 2000,
@@ -45,6 +64,10 @@ const SellModal = ({ item, setShowModal }: {item: any, setShowModal: any}) => {
       name: "",
       sellDate: "",
     });
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
   };
   return (
     <div>
@@ -110,14 +133,30 @@ const SellModal = ({ item, setShowModal }: {item: any, setShowModal: any}) => {
                     )}
                   />
                 </div>
+                <div className="w-full">
+                  <label className="label">
+                    <span className="label-text">Seler Name</span>
+                  </label>
+                  <Controller
+                    name="seller"
+                    defaultValue={currentUserName?.name}
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        className="input input-bordered w-full"
+                        required
+                        readOnly
+                      />
+                    )}
+                  />
+                </div>
               </div>
-              <button
-                
-                className="btn btn-primary mt-6"
-                type="submit"
-              >
+              <button className="btn btn-primary mt-6" type="submit">
                 Submit
               </button>
+              <button onClick={handleClose}>close</button>
             </form>
           </div>
         </div>
