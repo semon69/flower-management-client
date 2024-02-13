@@ -5,7 +5,7 @@ import {
   useAddFlowerMutation,
   useUpdateFlowerMutation,
 } from "../redux/features/flower/flowerApi";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const UpdateFlower = () => {
@@ -13,6 +13,7 @@ const UpdateFlower = () => {
   const [addFlower] = useAddFlowerMutation();
   const [updateFlower] = useUpdateFlowerMutation();
   const { state } = useLocation();
+  const navigate = useNavigate()
 
   const updateData = async (data: any) => {
     const {
@@ -54,6 +55,7 @@ const UpdateFlower = () => {
 
     await updateFlower(options);
     toast.success("Updated flower data successfully");
+    navigate('/all-flowers')
   };
 
   const createVariant = async (data: any) => {
@@ -93,6 +95,7 @@ const UpdateFlower = () => {
     await addFlower(flowerData);
 
     toast.success("Create variant successfully");
+    navigate('/all-flowers')
   };
 
   return (

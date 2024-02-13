@@ -32,6 +32,12 @@ const MainLayout = () => {
     { name: "Sells History", link: "/sells", icon: MdWorkHistory },
   ];
   const [open, setOpen] = useState(true);
+  const [activeRoute, setActiveRoute] = useState("/");
+
+  const handleLinkClick = (link: string) => {
+    setActiveRoute(link);
+  };
+
   return (
     <div>
       <section className="flex gap-3">
@@ -49,14 +55,17 @@ const MainLayout = () => {
           </div>
           <div className="mt-4 flex flex-col gap-4 relative">
             {menus?.map((menu, i) => {
-              if(user?.role != 'manager' && menu.link == "/add-flower"){
-                return ''
+              if (user?.role != "manager" && menu.link == "/add-flower") {
+                return "";
               }
               return (
                 <Link
+                onClick={() => handleLinkClick(menu.link)}
                   to={menu?.link}
                   key={i}
-                  className={`group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
+                  className={`group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md ${
+                    activeRoute === menu.link && "bg-blue-500" // Change color for active route
+                  }`}
                 >
                   <div>{React.createElement(menu?.icon, { size: "20" })}</div>
                   <h2
@@ -96,3 +105,5 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+
+// className={`group flex items-center text-sm  gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md `}
