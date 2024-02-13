@@ -27,13 +27,17 @@ const FlowerCard = ({
     <tr className="overflow-x-auto overflow-y-auto">
       <th>
         <label>
-          <input
-            disabled={user?.role == "manager" ? false : true}
-            type="checkbox"
-            className="checkbox"
-            checked={selectedRowKeys.includes(item._id)} // Check if the item is selected
-            onChange={() => handleCheckboxChange(item._id)} // Call the handler on checkbox change
-          />
+          {user?.role == "manager" ? (
+            <input
+              disabled={user?.role == "manager" ? false : true}
+              type="checkbox"
+              className="checkbox"
+              checked={selectedRowKeys.includes(item._id)} // Check if the item is selected
+              onChange={() => handleCheckboxChange(item._id)} // Call the handler on checkbox change
+            />
+          ) : (
+            ""
+          )}
         </label>
       </th>
       <td>
@@ -56,22 +60,28 @@ const FlowerCard = ({
       <th>{item?.popularity}</th>
       <th>{item.bloomDate}</th>
       <th className="">
-        <button
-          disabled={user?.role == "manager" ? false : true}
-          className="btn bg-blue-600 text-white btn-xs"
-        >
-          <Link to={"/update-flower"} state={item}>
-            Update
-          </Link>
-        </button>
-        <br />
-        <button
-          disabled={user?.role == "manager" ? false : true}
-          onClick={() => handleDelete(item._id)}
-          className="btn bg-red-600 text-white btn-xs mt-2"
-        >
-          Delete
-        </button>
+        {user?.role == "manager" ? (
+          <>
+            <button
+              disabled={user?.role == "manager" ? false : true}
+              className="btn bg-blue-600 text-white btn-xs"
+            >
+              <Link to={"/update-flower"} state={item}>
+                Update
+              </Link>
+            </button>
+            <br />
+            <button
+              disabled={user?.role == "manager" ? false : true}
+              onClick={() => handleDelete(item._id)}
+              className="btn bg-red-600 text-white btn-xs mt-2"
+            >
+              Delete
+            </button>
+          </>
+        ) : (
+          ""
+        )}
       </th>
     </tr>
   );

@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import LoadingData from "../components/LoadingData";
+import { useAppSelector } from "../redux/hook";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
 
 const ALlFlowers = () => {
   const [filterParams, setFilterParams] = useState({
@@ -30,9 +32,10 @@ const ALlFlowers = () => {
 
   const { data, isLoading } = useGetFlowersQuery(filterParams);
   const [deleteSelectedFlower] = useDeleteSelectedFlowerMutation();
+  const user = useAppSelector(useCurrentUser);
 
   if (isLoading) {
-    return <LoadingData />
+    return <LoadingData />;
   }
 
   const handleFilterChange = (filterName: string, value: string) => {
@@ -263,7 +266,7 @@ const ALlFlowers = () => {
                   <th>Season</th>
                   <th>Popularity</th>
                   <th>Bloam Date</th>
-                  <th>Actions</th>
+                  {user?.role == "manager" ? <th>Actions</th> : ""}
                 </tr>
               </thead>
               <tbody className="">
