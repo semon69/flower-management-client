@@ -19,6 +19,14 @@ const Users = () => {
     }
     updateRole(data)
   }
+  const handleMakeManager = (id: string) => {
+    const role = "manager"
+    const data = {
+        id,
+        role,
+    }
+    updateRole(data)
+  }
   return (
     <div>
       <div className="overflow-x-auto w-full">
@@ -49,10 +57,11 @@ const Users = () => {
                 </td>
                 <td>
                   <button
+                  onClick={()=> handleMakeManager(item?._id)}
                     disabled={item?.role == "manager"}
                     className="btn bg-blue-600 text-white"
                   >
-                    Make Admin
+                    Make Managerr
                   </button>
                 </td>
               </tr>

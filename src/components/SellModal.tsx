@@ -7,6 +7,7 @@ import { useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hook";
 import { useTotalUserQuery } from "../redux/features/auth/authApi";
 import LoadingData from "./LoadingData";
+import { useGetSingleCuponQuery } from "../redux/features/flower/flowerApi";
 
 const SellModal = ({
   item,
@@ -16,15 +17,23 @@ const SellModal = ({
   setShowModal: any;
 }) => {
   const [addSell] = useAddSellMutation();
-  const { handleSubmit, control, reset } = useForm();
+  const { handleSubmit, control, reset, register } = useForm();
   const [quantityError, setQuantityError] = useState("");
   const user = useAppSelector(useCurrentUser);
   const { data: totalUser, isLoading } = useTotalUserQuery(undefined);
+  const [cupon, setCupon] = useState("");
+  // console.log(cupon);
+
+  const { data: cuponData } = useGetSingleCuponQuery(cupon);
+  console.log(cuponData);
+
 
   const currentUserName = totalUser?.data?.find(
     (item: any) => item?.email == user?.email
   );
-  console.log(currentUserName?.name);
+
+  // console.log(currentUserName?.name);
+
   if (isLoading) {
     return <LoadingData />;
   }
@@ -41,12 +50,25 @@ const SellModal = ({
         setQuantityError(""); // Clear the error message if not exceeded
       }
 
+      // setCupon(data?.cupon);
+
       const sellsData = {
         name,
         quantity: quantityNumber,
         sellDate,
         flowerId: item._id,
+        price: 0
       };
+
+
+      if (cuponData?.data?.discount) {
+        sellsData.price =
+          quantityNumber * item?.price - cuponData?.data?.discount;
+      } else {
+        sellsData.price = quantityNumber * item?.price;
+      }
+
+      console.log("sell ddata", sellsData);
 
       await addSell(sellsData);
       setShowModal(false);
@@ -114,6 +136,35 @@ const SellModal = ({
                         required
                       />
                     )}
+                  />
+                </div>
+                <div className="w-full">
+                  <label className="label">
+                    <span className="label-text">Cupon Code</span>
+                  </label>
+                  {/* <Controller
+                    name="cupon"
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="text"
+                        placeholder="Set Cupon"
+                        className="input input-bordered w-full"
+                        required
+                      />
+                    )}
+                  /> */}
+                  <input
+                    type="text"
+                    placeholder="Set Cupon"
+                    className="input input-bordered w-full"
+                    required
+                    {...register("cupon", {
+                      onChange: (e) => {
+                        setCupon(e.target.value);
+                      },
+                    })}
                   />
                 </div>
                 <div className="w-full">

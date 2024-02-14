@@ -14,7 +14,7 @@ const AddSell = () => {
   if (isLoading) {
     return <LoadingData />;
   }
-  
+
   const handleSearchChange = (e: {
     target: { value: SetStateAction<string> };
   }) => {

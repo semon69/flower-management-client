@@ -41,6 +41,12 @@ const flowerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["flower"],
     }),
+    getSingleCupon: builder.query({
+      query: (data) => ({
+        url: `/cupon/${data}`,
+        method: "GET",
+      })
+    }),
   }),
 });
 
@@ -50,4 +56,5 @@ export const {
   useDeleteFlowerMutation,
   useUpdateFlowerMutation,
   useDeleteSelectedFlowerMutation,
+  useGetSingleCuponQuery
 } = flowerApi;
