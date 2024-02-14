@@ -3,13 +3,18 @@ import { TFlower } from "../globalInterface.ts/globalInterface";
 import SellCard from "../components/SellCard";
 import { SetStateAction, useState } from "react";
 import NoDataFound from "../components/NoDataFound";
+import LoadingData from "../components/LoadingData";
 
 const AddSell = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { data } = useGetFlowersQuery({
+  const { data, isLoading } = useGetFlowersQuery({
     name: searchQuery,
   });
 
+  if (isLoading) {
+    return <LoadingData />;
+  }
+  
   const handleSearchChange = (e: {
     target: { value: SetStateAction<string> };
   }) => {

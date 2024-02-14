@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { toast } from "sonner";
+
 import { TSell } from "../globalInterface.ts/globalInterface";
 import { useGetSellsQuery } from "../redux/features/sells/sellApi";
 import { useState } from "react";
 import NoDataFound from "../components/NoDataFound";
+import LoadingData from "../components/LoadingData";
 
 const SellsHistory = () => {
   const [selectedRange, setSelectedRange] = useState("yearly");
@@ -18,7 +19,7 @@ const SellsHistory = () => {
   });
 
   if (isLoading) {
-    toast.loading("Please Wait...", { duration: 1000 });
+    return <LoadingData />;
   }
 
   return (

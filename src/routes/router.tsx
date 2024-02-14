@@ -8,6 +8,7 @@ import SellsHistory from "../pages/SellsHistory";
 import AddSell from "../pages/AddSell";
 import Dashboard from "../pages/Dashboard";
 import UpdateFlower from "../components/UpdateFlower";
+import Users from "../pages/Users";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: '/update-flower',
         element: <UpdateFlower />
+      },
+      {
+        path: '/users',
+        element: <Users />
       }
     ],
   },

@@ -22,6 +22,7 @@ const MainLayout = () => {
 
   const menus = [
     { name: "Dashboard", link: "/", icon: MdOutlineDashboard },
+    { name: "Manage User", link: "/users", icon: MdOutlineDashboard },
     { name: "All-Flowers", link: "/all-flowers", icon: GiCottonFlower },
     { name: "Create Flower", link: "/add-flower", icon: SiCreatereactapp },
     {
@@ -55,7 +56,7 @@ const MainLayout = () => {
           </div>
           <div className="mt-4 flex flex-col gap-4 relative">
             {menus?.map((menu, i) => {
-              if (user?.role != "manager" && menu.link == "/add-flower") {
+              if (user?.role != "manager" && (menu.link == "/add-flower" || menu.link == "/users")) {
                 return "";
               }
               return (
