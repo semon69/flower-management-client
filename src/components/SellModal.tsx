@@ -88,9 +88,6 @@ const SellModal = ({
 
       await memeberPoints(calculatePointsForApi);
 
-
-      console.log(sellsData);
-
       await addSell(sellsData);
 
       setShowModal(false);

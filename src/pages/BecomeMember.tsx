@@ -25,7 +25,10 @@ const BecomeMember = () => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <h1 className="font-bold text-xl">Membership Form</h1>
+        </div>
         <div className="w-full lg:w-1/2 md:w-full sm:w-full">
           <label className="label text-lg md:text-base sm:text-sm">
             <span className="label-text">Name</span>
@@ -64,7 +67,7 @@ const BecomeMember = () => {
             )}
           />
         </div>
-        <button className="btn" type="submit">
+        <button className="btn bg-blue-600 text-white" type="submit">
           Sumbit
         </button>
       </form>

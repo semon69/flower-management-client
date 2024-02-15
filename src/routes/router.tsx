@@ -11,6 +11,7 @@ import UpdateFlower from "../components/UpdateFlower";
 import Users from "../pages/Users";
 import MemberShip from "../pages/MemberShip";
 import BecomeMember from "../pages/BecomeMember";
+import ManageMember from "../pages/ManageMember";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/users',
         element: <Users />
+      },
+      {
+        path: '/members',
+        element: <ManageMember />
       },
       {
         path: '/member',

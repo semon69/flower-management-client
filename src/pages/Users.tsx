@@ -61,7 +61,7 @@ const Users = () => {
                     disabled={item?.role == "manager"}
                     className="btn bg-blue-600 text-white"
                   >
-                    Make Managerr
+                    Make Manager
                   </button>
                 </td>
               </tr>

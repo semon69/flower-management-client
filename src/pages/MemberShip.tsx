@@ -13,15 +13,15 @@ const MemberShip = () => {
   }
 
   return (
-    <div>
-      <h1>
-        Your Points:{" "}
-        {member ? member?.data?.points : "You dont have any points"}
+    <div className="border-2 p-5 space-y-8">
+      <h1 className="font-semibold text-lg">
+        
+        {member ? `Your Points: ${member?.data?.points}` : "You dont have any points. Become a member first"}
       </h1>
       {member ? (
-        <button className="btn">Redeem Points</button>
+        <button className="btn text-white bg-blue-600">Redeem Points</button>
       ) : (
-        <button className="btn">
+        <button className="btn text-white bg-blue-600">
           <Link to="/become-member">Become a Member</Link>
         </button>
       )}

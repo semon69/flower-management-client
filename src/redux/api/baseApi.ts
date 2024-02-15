@@ -57,7 +57,7 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   // baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api/v1" }),
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["flower", "users"],
+  tagTypes: ["flower", "users","member"],
   endpoints: () => ({
     // login: builder.mutation({
     //   query: (userInfo) => ({

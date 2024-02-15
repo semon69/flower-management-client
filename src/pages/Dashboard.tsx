@@ -61,7 +61,7 @@ const Dashboard = () => {
     // </div>
     <div>
       <div>
-        <p className="text-center font-bold text-3xl text-green-500 my-5">
+        <p className="font-bold text-3xl text-green-500 my-8">
           Statistics
         </p>
       </div>

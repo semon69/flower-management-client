@@ -24,6 +24,7 @@ const MainLayout = () => {
     { name: "Dashboard", link: "/", icon: MdOutlineDashboard },
     { name: "Membership", link: "/member", icon: MdOutlineDashboard },
     { name: "Manage User", link: "/users", icon: MdOutlineDashboard },
+    { name: "Manage Member", link: "/members", icon: MdOutlineDashboard },
     { name: "All-Flowers", link: "/all-flowers", icon: GiCottonFlower },
     { name: "Create Flower", link: "/add-flower", icon: SiCreatereactapp },
     {
@@ -59,7 +60,7 @@ const MainLayout = () => {
             {menus?.map((menu, i) => {
               if (
                 user?.role != "manager" &&
-                (menu.link == "/add-flower" || menu.link == "/users")
+                (menu.link == "/add-flower" || menu.link == "/users" || menu.link == "/members")
               ) {
                 return "";
               }

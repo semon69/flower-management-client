@@ -26,11 +26,18 @@ const sellApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["flower"],
     }),
+    getMembers: builder.query({
+      query: () => ({
+        url: `/members`,
+        method: "GET",
+      }),
+      providesTags: ["member"]
+    }),
     getSingleMember: builder.query({
       query: (email) => ({
         url: `/member/${email}`,
         method: "GET",
-      }),
+      })
     }),
     calculatePoints: builder.mutation({
       query: (data) => ({
@@ -38,6 +45,7 @@ const sellApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["member"]
     }),
   }),
 });
@@ -46,6 +54,7 @@ export const {
   useAddSellMutation,
   useGetSellsQuery,
   useCreateMemberMutation,
+  useGetMembersQuery,
   useGetSingleMemberQuery,
   useCalculatePointsMutation
 } = sellApi;
