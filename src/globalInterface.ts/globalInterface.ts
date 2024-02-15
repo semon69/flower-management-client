@@ -16,5 +16,6 @@ export type TFlower = {
 export type TSell = {
   name: string;
   quantity: number;
+  price: number;
   sellDate: string;
 };

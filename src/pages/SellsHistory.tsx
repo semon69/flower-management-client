@@ -58,6 +58,7 @@ const SellsHistory = () => {
               <th></th>
               <th>Buyer Name</th>
               <th>Quantity</th>
+              <th>Price</th>
               <th>Sell Date</th>
             </tr>
           </thead>
@@ -67,6 +68,7 @@ const SellsHistory = () => {
                 <th>{index + 1}</th>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>
+                <td>{item.price}</td>
                 <td>{item.sellDate}</td>
               </tr>
             ))}

@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, useForm } from "react-hook-form";
-import { useAddSellMutation } from "../redux/features/sells/sellApi";
+import {
+  useAddSellMutation,
+  useCalculatePointsMutation,
+  useGetSingleMemberQuery,
+} from "../redux/features/sells/sellApi";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useCurrentUser } from "../redux/features/auth/authSlice";
@@ -21,12 +25,16 @@ const SellModal = ({
   const [quantityError, setQuantityError] = useState("");
   const user = useAppSelector(useCurrentUser);
   const { data: totalUser, isLoading } = useTotalUserQuery(undefined);
+  const [buyerEmail, setBuyerEmail] = useState("");
+
+  const { data: memberdata } = useGetSingleMemberQuery(buyerEmail);
+  const [ memeberPoints] =useCalculatePointsMutation()
+
+  console.log(memberdata);
+
   const [cupon, setCupon] = useState("");
-  // console.log(cupon);
 
   const { data: cuponData } = useGetSingleCuponQuery(cupon);
-  console.log(cuponData);
-
 
   const currentUserName = totalUser?.data?.find(
     (item: any) => item?.email == user?.email
@@ -40,7 +48,7 @@ const SellModal = ({
 
   const onSubmit = async (data: any) => {
     try {
-      const { quantity, name, sellDate } = data;
+      const { quantity, name, sellDate, buyerEmail } = data;
       const quantityNumber = parseInt(quantity);
 
       if (quantityNumber > item?.quantity) {
@@ -50,16 +58,14 @@ const SellModal = ({
         setQuantityError(""); // Clear the error message if not exceeded
       }
 
-      // setCupon(data?.cupon);
-
       const sellsData = {
         name,
+        buyerEmail,
         quantity: quantityNumber,
         sellDate,
         flowerId: item._id,
-        price: 0
+        price: quantityNumber * item?.price,
       };
-
 
       if (cuponData?.data?.discount) {
         sellsData.price =
@@ -68,12 +74,28 @@ const SellModal = ({
         sellsData.price = quantityNumber * item?.price;
       }
 
-      console.log("sell ddata", sellsData);
+      const calculatePoints = (purchaseAmount: number): number => {
+        // Define your conversion rate, for example:
+        const conversionRate = 0.1; // 1 point per $10 spent
+        return Math.floor(purchaseAmount * conversionRate);
+      };
+
+      const calculatePointsForApi = {
+        email: buyerEmail,
+        points: calculatePoints(sellsData.price),
+        purchaseAmount: sellsData.price,
+      };
+
+      await memeberPoints(calculatePointsForApi);
+
+
+      console.log(sellsData);
 
       await addSell(sellsData);
+
       setShowModal(false);
 
-      toast.success("Sell History added successfullty", {
+      toast.success("Sell Flower successfullty", {
         duration: 2000,
       });
     } catch (error) {
@@ -84,6 +106,7 @@ const SellModal = ({
     reset({
       quantity: "",
       name: "",
+      cupon: "",
       sellDate: "",
     });
   };
@@ -140,6 +163,34 @@ const SellModal = ({
                 </div>
                 <div className="w-full">
                   <label className="label">
+                    <span className="label-text">Buyer Email</span>
+                  </label>
+                  {/* <Controller
+                    name="buyerEmail"
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        type="email"
+                        placeholder="Buyer Email"
+                        className="input input-bordered w-full"
+                        required
+                      />
+                    )}
+                  /> */}
+                  <input
+                    type="text"
+                    placeholder="Buyer Email"
+                    className="input input-bordered w-full"
+                    {...register("buyerEmail", {
+                      onChange: (e) => {
+                        setBuyerEmail(e.target.value);
+                      },
+                    })}
+                  />
+                </div>
+                <div className="w-full">
+                  <label className="label">
                     <span className="label-text">Cupon Code</span>
                   </label>
                   {/* <Controller
@@ -159,7 +210,6 @@ const SellModal = ({
                     type="text"
                     placeholder="Set Cupon"
                     className="input input-bordered w-full"
-                    required
                     {...register("cupon", {
                       onChange: (e) => {
                         setCupon(e.target.value);

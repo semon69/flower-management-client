@@ -6,7 +6,7 @@ const sellApi = baseApi.injectEndpoints({
       query: (queryParams) => ({
         url: "/sells",
         method: "GET",
-        params: queryParams
+        params: queryParams,
       }),
       providesTags: ["flower"],
     }),
@@ -18,7 +18,34 @@ const sellApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["flower"],
     }),
+    createMember: builder.mutation({
+      query: (data) => ({
+        url: "/create-member",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["flower"],
+    }),
+    getSingleMember: builder.query({
+      query: (email) => ({
+        url: `/member/${email}`,
+        method: "GET",
+      }),
+    }),
+    calculatePoints: builder.mutation({
+      query: (data) => ({
+        url: `/calculatePoints`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useAddSellMutation, useGetSellsQuery } = sellApi;
+export const {
+  useAddSellMutation,
+  useGetSellsQuery,
+  useCreateMemberMutation,
+  useGetSingleMemberQuery,
+  useCalculatePointsMutation
+} = sellApi;

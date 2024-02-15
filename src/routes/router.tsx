@@ -9,6 +9,8 @@ import AddSell from "../pages/AddSell";
 import Dashboard from "../pages/Dashboard";
 import UpdateFlower from "../components/UpdateFlower";
 import Users from "../pages/Users";
+import MemberShip from "../pages/MemberShip";
+import BecomeMember from "../pages/BecomeMember";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: '/users',
         element: <Users />
+      },
+      {
+        path: '/member',
+        element: <MemberShip />
+      },
+      {
+        path: '/become-member',
+        element: <BecomeMember />
       }
     ],
   },
