@@ -11,7 +11,6 @@ const SellsHistory = () => {
 
   const handleRangeChange = (event: any) => {
     setSelectedRange(event.target.value);
-    console.log(selectedRange);
   };
 
   const { data, isLoading } = useGetSellsQuery({

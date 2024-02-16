@@ -39,9 +39,6 @@ const SellModal = ({
   console.log(memberdata);
 
   const [memeberPoints] = useCalculatePointsMutation();
-
-  console.log(memberdata);
-
   const [cupon, setCupon] = useState("");
 
   const { data: cuponData } = useGetSingleCuponQuery(cupon);

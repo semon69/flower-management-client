@@ -11,21 +11,21 @@ const Users = () => {
   const { data } = useTotalUserQuery(undefined);
   const [updateRole] = useUpdateRoleMutation()
 
-  const handleMakeSeller = (id: string) => {
+  const handleMakeSeller = async(id: string) => {
     const role = "seller"
     const data = {
         id,
         role,
     }
-    updateRole(data)
+    await updateRole(data)
   }
-  const handleMakeManager = (id: string) => {
+  const handleMakeManager = async(id: string) => {
     const role = "manager"
     const data = {
         id,
         role,
     }
-    updateRole(data)
+    await updateRole(data)
   }
   return (
     <div>

@@ -9,11 +9,10 @@ const Register = () => {
   const { register, handleSubmit, control } = useForm();
   const navigate = useNavigate()
 
-  const [registered, { data }] = useRegisteredMutation();
+  const [registered] = useRegisteredMutation();
 
   const onSubmit = async (userInfo: any) => {
     registered(userInfo);
-    console.log(data);
     toast.success('Registered successfully, Please Login Now')
     navigate('/login')
   };

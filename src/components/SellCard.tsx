@@ -8,7 +8,6 @@ import { useCurrentUser } from "../redux/features/auth/authSlice";
 
 const SellCard = ({ item }: { item: TFlower }) => {
   const [showModalSell, setShowModalSell] = useState(false);
-  // const [showModalBuy, setShowModalBuy] = useState(false);
   const user = useAppSelector(useCurrentUser);
 
   return (
@@ -27,15 +26,7 @@ const SellCard = ({ item }: { item: TFlower }) => {
       <th>{item.price}</th>
       <th>{item.bloomDate}</th>
       <th>
-        {/* {user?.role == "user" || user?.role == "manager" ? (
-          <button
-            disabled={user?.role == "manager" ? true : false}
-            className="btn bg-blue-600"
-            onClick={() => setShowModalBuy(true)}
-          >
-            Buy
-          </button>
-        ) : ( */}
+
         <button
           disabled={user?.role == "seller" ? false : true}
           className="btn bg-blue-600 text-white"
@@ -43,12 +34,10 @@ const SellCard = ({ item }: { item: TFlower }) => {
         >
           Sell
         </button>
-        {/* )} */}
 
         {showModalSell && (
           <SellModal setShowModal={setShowModalSell} item={item} />
         )}
-        {/* {showModalBuy && <BuyModal setShowModal={setShowModalBuy} item={item} />} */}
       </th>
     </tr>
   );

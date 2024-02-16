@@ -24,6 +24,7 @@ const MemberShip = () => {
         isRedeem: true,
       };
       await updateRedeem(redeemData);
+      toast.success("Now you can use your points by telling seller")
     } catch (error) {
       toast.error('Something went wrong')
     }
