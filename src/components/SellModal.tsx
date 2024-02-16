@@ -28,7 +28,9 @@ const SellModal = ({
   const [buyerEmail, setBuyerEmail] = useState("");
 
   const { data: memberdata } = useGetSingleMemberQuery(buyerEmail);
-  const [ memeberPoints] =useCalculatePointsMutation()
+  console.log(memberdata);
+
+  const [memeberPoints] = useCalculatePointsMutation();
 
   console.log(memberdata);
 
@@ -82,9 +84,16 @@ const SellModal = ({
 
       const calculatePointsForApi = {
         email: buyerEmail,
-        points: calculatePoints(sellsData.price),
-        purchaseAmount: sellsData.price,
+        points: calculatePoints(sellsData.price) + memberdata?.data?.points,
+        purchaseAmount: sellsData.price + memberdata?.data?.totalPurchase,
       };
+
+      if (memberdata?.data?.isRedeem && memberdata?.data?.points > 0) {
+        sellsData.price =
+          quantityNumber * item?.price - (memberdata?.data?.points * 0.5);
+      } else {
+        sellsData.price = quantityNumber * item?.price;
+      }
 
       await memeberPoints(calculatePointsForApi);
 

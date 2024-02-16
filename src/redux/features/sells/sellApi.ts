@@ -37,13 +37,22 @@ const sellApi = baseApi.injectEndpoints({
       query: (email) => ({
         url: `/member/${email}`,
         method: "GET",
-      })
+      }),
+      providesTags: ["member"]
     }),
     calculatePoints: builder.mutation({
       query: (data) => ({
         url: `/calculatePoints`,
         method: "PATCH",
         body: data,
+      }),
+      invalidatesTags: ["member"]
+    }),
+    redeemPoint: builder.mutation({
+      query: (data) => ({
+        url: `/updateRedeem/${data.email}`,
+        method: "PATCH",
+        body: data.isRedeem
       }),
       invalidatesTags: ["member"]
     }),
@@ -56,5 +65,6 @@ export const {
   useCreateMemberMutation,
   useGetMembersQuery,
   useGetSingleMemberQuery,
-  useCalculatePointsMutation
+  useCalculatePointsMutation,
+  useRedeemPointMutation
 } = sellApi;
