@@ -29,7 +29,7 @@ The Flower Management System is a comprehensive web application built using Reac
 
 1. Clone the repository:
 
-   git clone https://github.com/Porgramming-Hero-web-course/l2b2-full-stack-a5-client-side-semon69.git
+   git clone https://github.com/Porgramming-Hero-web-course/l2-b2-assignment-6-fronten-semon69.git
 
 2. Navigate project directory:
 
@@ -65,6 +65,6 @@ For a complete and up-to-date list of dependencies along with their versions, pl
 
 ## Live Demo
 
-Visit the live demo of the Smartphone Management System [here](https://flower-management-client-kappa.vercel.app/).
+Visit the live demo of the Smartphone Management System [here](https://flower-management-client-kappa.vercel.app).
 
 Feel free to explore the features and functionalities!

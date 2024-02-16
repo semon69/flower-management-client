@@ -13,6 +13,14 @@ import { useTotalUserQuery } from "../redux/features/auth/authApi";
 import LoadingData from "./LoadingData";
 import { useGetSingleCuponQuery } from "../redux/features/flower/flowerApi";
 
+type TsellsData = {
+  name: string
+  buyerEmail: string
+  quantity: number;
+  sellDate: Date
+  flowerId: string
+  price?: number
+};
 const SellModal = ({
   item,
   setShowModal,
@@ -60,13 +68,12 @@ const SellModal = ({
         setQuantityError(""); // Clear the error message if not exceeded
       }
 
-      const sellsData = {
+      const sellsData: TsellsData = {
         name,
         buyerEmail,
         quantity: quantityNumber,
         sellDate,
-        flowerId: item._id,
-        price: quantityNumber * item?.price,
+        flowerId: item._id
       };
 
       if (cuponData?.data?.discount) {
@@ -90,9 +97,7 @@ const SellModal = ({
 
       if (memberdata?.data?.isRedeem && memberdata?.data?.points > 0) {
         sellsData.price =
-          quantityNumber * item?.price - (memberdata?.data?.points * 0.5);
-      } else {
-        sellsData.price = quantityNumber * item?.price;
+          quantityNumber * item?.price - memberdata?.data?.points * 0.5;
       }
 
       await memeberPoints(calculatePointsForApi);
