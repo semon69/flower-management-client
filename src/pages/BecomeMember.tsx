@@ -7,21 +7,30 @@ import {
 import { useCreateMemberMutation } from "../redux/features/sells/sellApi";
 import { useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hook";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const BecomeMember = () => {
   const { handleSubmit, control } = useForm();
   const [createMember] = useCreateMemberMutation();
   const user = useAppSelector(useCurrentUser);
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const { name, email } = data;
-    const memberData = {
-      name,
-      email,
-    };
+    try {
+      const { name, email } = data;
+      const memberData = {
+        name,
+        email,
+      };
 
-    const res = await createMember(memberData);
-    console.log(res);
+      await createMember(memberData);
+
+      toast.success("Congratulations, You are our new member!");
+      navigate("/member");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <div>

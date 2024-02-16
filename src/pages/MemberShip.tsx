@@ -6,6 +6,7 @@ import {
 import { useCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hook";
 import LoadingData from "../components/LoadingData";
+import { toast } from "sonner";
 
 const MemberShip = () => {
   const user = useAppSelector(useCurrentUser);
@@ -17,11 +18,15 @@ const MemberShip = () => {
   }
 
   const handleRedeem = async () => {
-    const redeemData = {
-      email: member?.data?.email,
-      isRedeem: true,
-    };
-    await updateRedeem(redeemData);
+    try {
+      const redeemData = {
+        email: member?.data?.email,
+        isRedeem: true,
+      };
+      await updateRedeem(redeemData);
+    } catch (error) {
+      toast.error('Something went wrong')
+    }
   };
 
   return (
@@ -33,7 +38,7 @@ const MemberShip = () => {
       </h1>
       {member ? (
         <div>
-          {member?.data?.isRedeem ? (
+          {(member?.data?.isRedeem && member?.data?.points > 0) ? (
             <button className="btn text-white bg-green-600">
               <Link to={"/add-sells"}>Use points now</Link>
             </button>

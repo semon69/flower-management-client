@@ -37,8 +37,8 @@ const SellCard = ({ item }: { item: TFlower }) => {
           </button>
         ) : ( */}
         <button
-          disabled={user?.role == "manager" ? true : false}
-          className="btn bg-blue-600"
+          disabled={user?.role == "seller" ? false : true}
+          className="btn bg-blue-600 text-white"
           onClick={() => setShowModalSell(true)}
         >
           Sell
