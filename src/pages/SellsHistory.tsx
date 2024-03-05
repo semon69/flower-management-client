@@ -51,8 +51,8 @@ const SellsHistory = () => {
       
 
       <div className="overflow-x-auto w-full">
-        <table className="table-lg">
-          <thead>
+        <table className="table border-4">
+          <thead className="font-bold text-xl text-black">
             <tr>
               <th></th>
               <th>Buyer Name</th>
@@ -65,7 +65,7 @@ const SellsHistory = () => {
             {data?.data?.map((item: TSell, index: number) => (
               <tr>
                 <th>{index + 1}</th>
-                <td>{item.name}</td>
+                <td className="font-bold">{item.name}</td>
                 <td>{item.quantity}</td>
                 <td>{item.price}</td>
                 <td>{item.sellDate}</td>

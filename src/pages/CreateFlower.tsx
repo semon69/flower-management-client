@@ -66,7 +66,7 @@ const CreateFlower = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="lg:flex gap-4">
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
-                <label className="label text-lg md:text-base sm:text-sm">
+                <label className="label text-lg md:text-base sm:text-sm font-bold">
                   <span className="label-text">Name</span>
                 </label>
                 <Controller
@@ -85,7 +85,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Image</span>
+                  <span className="label-text font-bold">Image</span>
                 </label>
                 <Controller
                   name="image"
@@ -105,7 +105,7 @@ const CreateFlower = () => {
             <div className=" lg:flex gap-4">
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Color</span>
+                  <span className="label-text font-bold">Color</span>
                 </label>
                 <Controller
                   name="color"
@@ -123,7 +123,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Price</span>
+                  <span className="label-text font-bold">Price</span>
                 </label>
                 <Controller
                   name="price"
@@ -143,7 +143,7 @@ const CreateFlower = () => {
             <div className=" lg:flex gap-4">
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Quantity</span>
+                  <span className="label-text font-bold">Quantity</span>
                 </label>
                 <Controller
                   name="quantity"
@@ -161,7 +161,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Size</span>
+                  <span className="label-text font-bold">Size</span>
                 </label>
                 <Controller
                   name="size"
@@ -181,7 +181,7 @@ const CreateFlower = () => {
             <div className=" lg:flex gap-4">
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Type</span>
+                  <span className="label-text font-bold">Type</span>
                 </label>
                 <Controller
                   name="type"
@@ -202,7 +202,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Bloom Date</span>
+                  <span className="label-text font-bold">Bloom Date</span>
                 </label>
                 <Controller
                   name="bloomDate"
@@ -221,7 +221,7 @@ const CreateFlower = () => {
             <div className=" lg:flex gap-4">
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Season</span>
+                  <span className="label-text font-bold">Season</span>
                 </label>
                 <Controller
                   name="season"
@@ -243,7 +243,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Fragnance</span>
+                  <span className="label-text font-bold">Fragnance</span>
                 </label>
                 <Controller
                   name="fragrance"
@@ -266,7 +266,7 @@ const CreateFlower = () => {
               </div>
               <div className="w-full lg:w-1/2 md:w-full sm:w-full">
                 <label className="label text-lg md:text-base sm:text-sm">
-                  <span className="label-text">Popularity</span>
+                  <span className="label-text font-bold">Popularity</span>
                 </label>
                 <Controller
                   name="popularity"

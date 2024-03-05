@@ -1,6 +1,6 @@
 import { useGetFlowersQuery } from "../redux/features/flower/flowerApi";
 import { TFlower } from "../globalInterface.ts/globalInterface";
-import SellCard from "../components/SellCard";
+import SellCard from "../components/BuyCard";
 import { SetStateAction, useState } from "react";
 import NoDataFound from "../components/NoDataFound";
 import LoadingData from "../components/LoadingData";
@@ -36,7 +36,7 @@ const AddSell = () => {
       <div className="overflow-x-auto border-4 p-2 my-10">
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className="font-bold text-xl text-black">
             <tr>
               <th>Name</th>
               <th>Color</th>

@@ -21,7 +21,7 @@ type TsellsData = {
   flowerId: string
   price?: number
 };
-const SellModal = ({
+const BuyModal = ({
   item,
   setShowModal,
 }: {
@@ -118,10 +118,6 @@ const SellModal = ({
       sellDate: "",
     });
   };
-
-  const handleClose = () => {
-    setShowModal(false);
-  };
   return (
     <div>
       <div className="fixed inset-0 flex items-center justify-center z-50 ml-40 -mt-20">
@@ -173,19 +169,7 @@ const SellModal = ({
                   <label className="label">
                     <span className="label-text">Buyer Email</span>
                   </label>
-                  {/* <Controller
-                    name="buyerEmail"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="email"
-                        placeholder="Buyer Email"
-                        className="input input-bordered w-full"
-                        required
-                      />
-                    )}
-                  /> */}
+                 
                   <input
                     type="text"
                     placeholder="Buyer Email"
@@ -201,19 +185,7 @@ const SellModal = ({
                   <label className="label">
                     <span className="label-text">Cupon Code</span>
                   </label>
-                  {/* <Controller
-                    name="cupon"
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        placeholder="Set Cupon"
-                        className="input input-bordered w-full"
-                        required
-                      />
-                    )}
-                  /> */}
+                 
                   <input
                     type="text"
                     placeholder="Set Cupon"
@@ -227,7 +199,7 @@ const SellModal = ({
                 </div>
                 <div className="w-full">
                   <label className="label">
-                    <span className="label-text">Sell Date</span>
+                    <span className="label-text">Buy Date</span>
                   </label>
                   <Controller
                     name="sellDate"
@@ -265,7 +237,6 @@ const SellModal = ({
               <button className="btn btn-primary mt-6" type="submit">
                 Submit
               </button>
-              <button onClick={handleClose}>close</button>
             </form>
           </div>
         </div>
@@ -274,4 +245,4 @@ const SellModal = ({
   );
 };
 
-export default SellModal;
+export default BuyModal;

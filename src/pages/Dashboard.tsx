@@ -25,16 +25,16 @@ const Dashboard = () => {
   return (
     <div>
       <div>
-        <p className="font-bold text-3xl text-green-500 my-8">
+        <p className="font-bold text-3xl text-blue-800 my-8">
           Statistics
         </p>
       </div>
       <BarChart width={600} height={300} data={data}>
-        <XAxis dataKey="name" stroke="#8884d8" />
+        <XAxis dataKey="name" stroke="#000080" />
         <YAxis />
         <Tooltip />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <Bar dataKey="value" fill="#8884d8" barSize={30} />
+        <CartesianGrid stroke="#000080" strokeDasharray="5 5" />
+        <Bar dataKey="value" fill="#000080" barSize={30} />
       </BarChart>
     </div>
   );

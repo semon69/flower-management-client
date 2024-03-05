@@ -242,7 +242,7 @@ const ALlFlowers = () => {
           <NoDataFound title="Flowers" />
         ) : (
           <div className="overflow-x-auto overflow-y-auto mt-4 lg:mt-10 mb-5">
-            <table className="table">
+            <table className="table border-4 shadow-xl">
               {/* head */}
               <thead>
                 <tr className="text-xl font-bold ">
@@ -266,7 +266,7 @@ const ALlFlowers = () => {
                   <th>Season</th>
                   <th>Popularity</th>
                   <th>Bloam Date</th>
-                  {user?.role == "manager" ? <th>Actions</th> : ""}
+                  {user?.role == "manager" ? <th>Action</th> : ""}
                 </tr>
               </thead>
               <tbody className="">

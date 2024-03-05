@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { TFlower } from "../globalInterface.ts/globalInterface";
-import SellModal from "./SellModal";
 import { useAppSelector } from "../redux/hook";
 import { useCurrentUser } from "../redux/features/auth/authSlice";
+import BuyModal from "./BuyModal";
 
 const SellCard = ({ item }: { item: TFlower }) => {
   const [showModalSell, setShowModalSell] = useState(false);
@@ -28,15 +28,15 @@ const SellCard = ({ item }: { item: TFlower }) => {
       <th>
 
         <button
-          disabled={user?.role == "seller" ? false : true}
+          disabled={user?.role == "user" ? false : true}
           className="btn bg-blue-600 text-white"
           onClick={() => setShowModalSell(true)}
         >
-          Sell
+          Buy
         </button>
 
         {showModalSell && (
-          <SellModal setShowModal={setShowModalSell} item={item} />
+          <BuyModal setShowModal={setShowModalSell} item={item} />
         )}
       </th>
     </tr>

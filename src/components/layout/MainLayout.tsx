@@ -28,7 +28,7 @@ const MainLayout = () => {
     { name: "All-Flowers", link: "/all-flowers", icon: GiCottonFlower },
     { name: "Create Flower", link: "/add-flower", icon: SiCreatereactapp },
     {
-      name: "Sell Management",
+      name: "Buy Flowers",
       link: "/add-sells",
       icon: MdOutlineManageHistory,
     },
@@ -43,7 +43,7 @@ const MainLayout = () => {
 
   return (
     <div>
-      <section className="flex gap-3">
+      <section className="flex">
         <div
           className={`bg-[#0e0e0e] min-h-screen ${
             open ? "w-72" : "w-16"
@@ -105,7 +105,7 @@ const MainLayout = () => {
             </button>
           </div>
         </div>
-        <div className="overflow-y-auto w-full p-2 lg:p-10">
+        <div className="overflow-y-auto w-full lg:p-10 bg-gradient-to-br from-[#BFF098] to-[#6FD6FF]">
           <Outlet />
         </div>
       </section>

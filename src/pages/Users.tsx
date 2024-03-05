@@ -28,10 +28,10 @@ const Users = () => {
     await updateRole(data)
   }
   return (
-    <div>
-      <div className="overflow-x-auto w-full">
-        <table className="table-lg">
-          <thead>
+    <div style={{ width: "100%", height: "100vh" }}>
+      <div className="overflow-y-auto w-full">
+        <table className="table border-4">
+          <thead className="font-bold text-lg text-black">
             <tr>
               <th></th>
               <th>Name</th>
@@ -44,7 +44,7 @@ const Users = () => {
             {data?.data?.map((item: TUserData, index: number) => (
               <tr>
                 <th>{index + 1}</th>
-                <td>{item?.name}</td>
+                <td className="font-bold">{item?.name}</td>
                 <td>{item?.role}</td>
                 <td>
                   <button
