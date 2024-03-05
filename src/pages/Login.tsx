@@ -7,7 +7,7 @@ import { verifyToken } from "../utils/verfyToken";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Lottie from "lottie-react";
-import loginDataLottie from "../../public/registration.json";
+import loginDataLottie from "../../public/login.json";
 
 const Login = () => {
   const dispatch = useAppDispatch();

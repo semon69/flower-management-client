@@ -5,7 +5,7 @@ import { logout, setUser } from "../features/auth/authSlice";
 // https://flower-management-five.vercel.app
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://flower-management-five.vercel.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
