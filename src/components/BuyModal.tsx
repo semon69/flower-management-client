@@ -7,45 +7,30 @@ import {
 } from "../redux/features/sells/sellApi";
 import { toast } from "sonner";
 import { useState } from "react";
-import { useCurrentUser } from "../redux/features/auth/authSlice";
-import { useAppSelector } from "../redux/hook";
-import { useTotalUserQuery } from "../redux/features/auth/authApi";
 import LoadingData from "./LoadingData";
 import { useGetSingleCuponQuery } from "../redux/features/flower/flowerApi";
 
 type TsellsData = {
-  name: string
-  buyerEmail: string
+  name: string;
+  buyerEmail: string;
   quantity: number;
-  sellDate: Date
-  flowerId: string
-  price?: number
+  sellDate: Date;
+  flowerId: string;
+  price?: number;
 };
-const BuyModal = ({
-  item,
-  setShowModal,
-}: {
-  item: any;
-  setShowModal: any;
-}) => {
+const BuyModal = ({ item, setShowModal }: { item: any; setShowModal: any }) => {
   const [addSell] = useAddSellMutation();
   const { handleSubmit, control, reset, register } = useForm();
   const [quantityError, setQuantityError] = useState("");
-  const user = useAppSelector(useCurrentUser);
-  const { data: totalUser, isLoading } = useTotalUserQuery(undefined);
   const [buyerEmail, setBuyerEmail] = useState("");
 
-  const { data: memberdata } = useGetSingleMemberQuery(buyerEmail);
+  const { data: memberdata, isLoading } = useGetSingleMemberQuery(buyerEmail);
   console.log(memberdata);
 
   const [memeberPoints] = useCalculatePointsMutation();
   const [cupon, setCupon] = useState("");
 
   const { data: cuponData } = useGetSingleCuponQuery(cupon);
-
-  const currentUserName = totalUser?.data?.find(
-    (item: any) => item?.email == user?.email
-  );
 
   // console.log(currentUserName?.name);
 
@@ -70,7 +55,7 @@ const BuyModal = ({
         buyerEmail,
         quantity: quantityNumber,
         sellDate,
-        flowerId: item._id
+        flowerId: item._id,
       };
 
       if (cuponData?.data?.discount) {
@@ -118,6 +103,12 @@ const BuyModal = ({
       sellDate: "",
     });
   };
+
+  const handleCancel = () => {
+    setShowModal(false);
+  };
+
+
   return (
     <div>
       <div className="fixed inset-0 flex items-center justify-center z-50 ml-40 -mt-20">
@@ -169,7 +160,7 @@ const BuyModal = ({
                   <label className="label">
                     <span className="label-text">Buyer Email</span>
                   </label>
-                 
+
                   <input
                     type="text"
                     placeholder="Buyer Email"
@@ -185,7 +176,7 @@ const BuyModal = ({
                   <label className="label">
                     <span className="label-text">Cupon Code</span>
                   </label>
-                 
+
                   <input
                     type="text"
                     placeholder="Set Cupon"
@@ -214,28 +205,13 @@ const BuyModal = ({
                     )}
                   />
                 </div>
-                <div className="w-full">
-                  <label className="label">
-                    <span className="label-text">Seler Name</span>
-                  </label>
-                  <Controller
-                    name="seller"
-                    defaultValue={currentUserName?.name}
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="text"
-                        className="input input-bordered w-full"
-                        required
-                        readOnly
-                      />
-                    )}
-                  />
-                </div>
               </div>
               <button className="btn btn-primary mt-6" type="submit">
                 Submit
+              </button>
+
+              <button onClick={handleCancel} className="btn bg-red-600 mt-6 text-white ms-3" type="submit">
+                Cancel
               </button>
             </form>
           </div>
